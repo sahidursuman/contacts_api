@@ -27,6 +27,10 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'rswag'
 
+# For adding avatar
+gem 'carrierwave'
+gem 'carrierwave-base64'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
