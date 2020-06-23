@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+if Rails.env.development?
+  require 'faker'
+
+  ActiveRecord::Base.transaction do
+    puts "Creating seed data ......"
+    10000.times do 
+      Contact.create(
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        bio: Faker::Quote.matz
+      )
+    end
+
+    puts "End seed data."
+  end
+
+end
