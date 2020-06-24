@@ -1,0 +1,118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Contacts API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/v1/contacts?since={timestamp}": {
+      "get": {
+        "summary": "All Contacts",
+        "tags": [
+          "AllContacts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "path",
+            "description": "Timestamp",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+          
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          
+        }
+      }
+    },
+
+    "/api/v1/contacts/{id}": {
+      "get": {
+        "tags": [
+          "contacts"
+        ],
+        "summary": "Find contact by ID",
+        "description": "Returns a single contact",
+        "operationId": "getContactById",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of contact to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          
+        }
+      },
+      "put": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Updates a contact in the store with form data",
+        "description": "",
+        "operationId": "updateContactWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of contact that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "contact[name]",
+            "in": "formData",
+            "description": "Updated name of the contact",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contact[email]",
+            "in": "formData",
+            "description": "Updated email of the contact",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contact[bio]",
+            "in": "formData",
+            "description": "Updated email of the bio",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

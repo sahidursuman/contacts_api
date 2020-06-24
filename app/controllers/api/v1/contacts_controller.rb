@@ -3,6 +3,17 @@ module Api
     class ContactsController < ApiController
       skip_before_action :verify_authenticity_token
 
+      rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+      rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+
+      def render_unprocessable_entity_response(exception)
+        render json: {data: exception.record.errors}, status: :unprocessable_entity
+      end
+
+      def render_not_found_response(exception)
+        render json: { data: exception.message }, status: :not_found
+      end
+
       def index
         fetch_contacts = fetch_contacts(params)
         contacts = fetch_contacts.map do |contact|
